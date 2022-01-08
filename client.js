@@ -3,7 +3,8 @@ var term=new Terminal();
 Terminal.applyAddon(fullscreen);
 term.open(document.body);
 term.toggleFullScreen();
-if(window.location.hash!=="") {
+var address;
+if(window.location.hash=="") {
     var address=prompt("Server address");
 }
 else {
