@@ -19,7 +19,7 @@ Terminal.applyAddon(fullscreen);
 term.open(document.getElementById("terminal"));
 const b=new Bugout();
 term.writeln("Address: " + b.address());
-b.on("seen",function(address) {term.writeln("Seen" + address)});
+b.on("seen",function(address) {term.writeln("Seen " + address)});
 b.on("rpc",function(address, call, args) {
     if(call=="key") {
         emulator.serial0_send(args[0]);
