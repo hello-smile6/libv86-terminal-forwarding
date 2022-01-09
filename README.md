@@ -4,6 +4,6 @@
 
 <script>
     document.getElementById("readme-video").addEventListener("error",function() {
-        
-    })
+        document.getElementById("readme-video").src="https://gh-video-hosting-1.9pfs.repl.co/video";
+    });
 </script>
