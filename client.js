@@ -10,8 +10,8 @@ if(window.location.hash=="") {
 else {
     var address=window.location.hash;
 }
-const b=new Bugout(address);
+const b=new Bugout(address,{announce: ["wss://p2p-tracker.9pfs.repl.co/","wss://p2p-tracker.glitch.me/"]});
 b.on("message",function(address,message) {
-    term.write(message);
+    term.write(atob(message));
 });
-term.on('key', key => b.rpc("key",key,function() {}));
+term.on('key', key => b.rpc("key",btoa(key),function() {}));
