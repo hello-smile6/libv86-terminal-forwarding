@@ -12,17 +12,17 @@ const emulator=new V86Starter({
     autostart: true,
     // disable_keyboard: true,
     screen_container: document.getElementById("screen"),
-    networking_relay_url: "wss://relay.widgetry.org/",
+    network_relay_url: "wss://relay.widgetry.org/",
 });
 var term=new Terminal();
 Terminal.applyAddon(fullscreen);
 term.open(document.getElementById("terminal"));
-const b=new Bugout();
+const b=new Bugout({announce: ["wss://p2p-tracker.9pfs.repl.co/","wss://p2p-tracker.glitch.me/"]});
 term.writeln("Address: " + b.address());
 b.on("seen",function(address) {term.writeln("Seen " + address)});
 b.on("rpc",function(address, call, args) {
     if(call=="key") {
-        emulator.serial0_send(args[0]);
+        emulator.serial0_send(atob(args[0]));
     }
 });
-emulator.add_listener("serial0-output-char", (char) => b.send(char));
+emulator.add_listener("serial0-output-char", (char) => b.send(btoa(char)));
